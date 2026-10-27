@@ -1,0 +1,24 @@
+{
+ "name": "daybook-drag",
+ "url": "demo-app/mobile.html",
+ "device": "iphone",
+ "scale": 2,
+ "pointerStart": [
+  300,
+  760
+ ],
+ "steps": [
+  {
+   "wait": 0.7
+  },
+  {
+   "drag": "birthday",
+   "to": ".timeline .hour:nth-child(3)",
+   "hold": 0.35,
+   "duration": 1.5
+  },
+  {
+   "wait": 1.8
+  }
+ ]
+}

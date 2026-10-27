@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gallery",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4580",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "library"
+      ],
+      "port": 4580
+    }
+  ]
+}

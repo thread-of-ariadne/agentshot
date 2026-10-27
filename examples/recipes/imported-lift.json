@@ -1,0 +1,17 @@
+{
+ "name": "imported-lift",
+ "product": "daybook",
+ "capture": "imported-iphone",
+ "shot": "main",
+ "device": "iphone-white",
+ "background": "rose",
+ "lift": {
+  "target": [
+   16,
+   654,
+   358,
+   42
+  ],
+  "label": "From an iPhone screenshot"
+ }
+}

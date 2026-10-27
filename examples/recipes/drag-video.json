@@ -1,0 +1,28 @@
+{
+ "name": "drag-video",
+ "product": "daybook",
+ "capture": "daybook-drag",
+ "background": "peach",
+ "cuts": [
+  {
+   "from": 0.5,
+   "to": 5.37,
+   "name": "Drag to 11 AM"
+  }
+ ],
+ "zoom": [
+  {
+   "start": 1.2,
+   "end": 3.4,
+   "scale": 1.2,
+   "target": "dropped"
+  }
+ ],
+ "lift": {
+  "target": "dropped",
+  "start": 3.9,
+  "radius": 10,
+  "label": "Planned for 11 AM"
+ },
+ "tail": 1.4
+}

@@ -1,0 +1,41 @@
+{
+ "name": "help-step1",
+ "product": "daybook",
+ "capture": "daybook-phone",
+ "shot": "main",
+ "annotations": [
+  {
+   "type": "step",
+   "n": 1,
+   "target": "birthday"
+  },
+  {
+   "type": "outline",
+   "target": "birthday",
+   "pad": 4
+  },
+  {
+   "type": "arrow",
+   "to": "birthday",
+   "anchor": [
+    0.82,
+    0
+   ],
+   "fromCanvas": [
+    0.72,
+    0.38
+   ],
+   "curve": -0.3
+  },
+  {
+   "type": "text",
+   "text": "Drag a task onto your day",
+   "at": [
+    0.5,
+    0.035
+   ],
+   "size": 0.045
+  }
+ ],
+ "padding": 0.1
+}

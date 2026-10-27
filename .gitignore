@@ -1,0 +1,13 @@
+node_modules/
+out/
+.cache/
+.recording/
+.recording-sim/
+public/captures/
+# personal work and rendered libraries stay local; only the demo product's style is shared
+work/
+library/*
+!library/daybook/
+library/daybook/*
+!library/daybook/style.json
+!library/daybook/guidelines.md

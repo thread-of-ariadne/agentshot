@@ -1,0 +1,8 @@
+# LF in the repository and in checkouts; Windows tools here (pwsh, Node, ffmpeg) read LF fine
+* text=auto eol=lf
+# PowerShell scripts in Windows' native line endings
+*.ps1 text eol=crlf
+*.png binary
+*.jpg binary
+*.mp4 binary
+*.woff2 binary

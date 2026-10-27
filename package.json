@@ -1,0 +1,64 @@
+{
+  "name": "agentshot",
+  "version": "0.1.0",
+  "description": "Agent-driven product screenshots and demo videos: capture an app, describe the look in a JSON recipe, render PNG/MP4 into a versioned library.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thread-of-ariadne/agentshot.git"
+  },
+  "homepage": "https://github.com/thread-of-ariadne/agentshot#readme",
+  "bugs": {
+    "url": "https://github.com/thread-of-ariadne/agentshot/issues"
+  },
+  "private": true,
+  "type": "module",
+  "keywords": [
+    "screenshots",
+    "demo-video",
+    "mockup",
+    "playwright",
+    "ffmpeg",
+    "claude-code",
+    "agent",
+    "cli"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "bin": {
+    "agentshot": "bin/agentshot.mjs"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "install-skill": "node scripts/install-skill.mjs",
+    "selftest-record": "node scripts/selftest-record.mjs",
+    "selftest-mac": "node scripts/selftest-mac.mjs",
+    "preview": "node bin/agentshot.mjs preview",
+    "test": "node scripts/smoke.mjs",
+    "check": "tsc -p . && node scripts/check-syntax.mjs",
+    "agentshot": "node bin/agentshot.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/caveat": "5.3.0",
+    "@fontsource-variable/cormorant-garamond": "5.3.0",
+    "@fontsource-variable/fraunces": "5.3.0",
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/lora": "5.3.0",
+    "@fontsource-variable/manrope": "5.3.0",
+    "@fontsource-variable/nunito": "5.3.0",
+    "@fontsource-variable/playfair-display": "5.3.0",
+    "@fontsource/dm-serif-display": "5.3.0",
+    "@fontsource/gilda-display": "5.3.0",
+    "@fontsource/poppins": "5.3.0",
+    "esbuild": "0.28.2",
+    "playwright-core": "1.64.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "typescript": "5.8.3"
+  }
+}

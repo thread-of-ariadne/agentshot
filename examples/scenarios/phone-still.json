@@ -1,0 +1,10 @@
+{
+ "name": "daybook-phone",
+ "url": "demo-app/mobile.html",
+ "device": "iphone",
+ "steps": [
+  {
+   "shot": "main"
+  }
+ ]
+}

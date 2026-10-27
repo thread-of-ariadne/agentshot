@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daybook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=block" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf8; --ink: #1c1b1f; --muted: #8a8791; --line: #ecebef;
+    --accent: #6d5ce8; --accent-soft: #efecff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: Inter, system-ui, sans-serif; color: var(--ink); background: var(--bg);
+    -webkit-font-smoothing: antialiased; overflow: hidden; user-select: none;
+  }
+  .app { position: relative; height: 100%; padding-top: 54px; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; padding: 6px 18px 10px; }
+  .top .back { font-size: 22px; color: var(--accent); width: 28px; }
+  .top h1 { font-size: 17px; font-weight: 600; }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #ffb38a, #f07a9a); }
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); padding: 0 12px 12px; border-bottom: 1px solid var(--line); }
+  .day { text-align: center; font-size: 11px; color: var(--muted); font-weight: 500; }
+  .day b { display: block; margin: 6px auto 0; width: 32px; height: 32px; line-height: 32px; border-radius: 50%; font-size: 15px; color: var(--ink); font-weight: 600; }
+  .day.on b { background: var(--accent); color: #fff; }
+  .timeline { position: relative; flex: 1; padding: 6px 16px 0 62px; }
+  .hour { position: relative; height: 62px; border-top: 1px solid var(--line); }
+  .hour span { position: absolute; left: -48px; top: -8px; font-size: 11px; color: var(--muted); font-weight: 500; }
+  .block {
+    position: absolute; left: 66px; right: 16px; border-radius: 10px; padding: 7px 10px;
+    font-size: 13px; font-weight: 600; line-height: 1.25; overflow: hidden;
+  }
+  .block small { display: block; font-size: 11px; font-weight: 500; opacity: .75; margin-top: 2px; }
+  .b-green { background: #e3f6ea; color: #17643a; border-left: 3px solid #2fb36a; }
+  .b-purple { background: var(--accent-soft); color: #3c2fa6; border-left: 3px solid var(--accent); }
+  .b-orange { background: #fff0e2; color: #9a4a0c; border-left: 3px solid #f3913a; }
+  .b-pink { background: #ffe8ef; color: #9c1f4a; border-left: 3px solid #ec5b8a; }
+  .now { position: absolute; left: 58px; right: 16px; height: 2px; background: #ef4f4f; }
+  .now::before { content: ""; position: absolute; left: -4px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: #ef4f4f; }
+  .tray {
+    position: absolute; left: 0; right: 0; bottom: 0; background: #fff; border-radius: 22px 22px 0 0;
+    box-shadow: 0 -8px 30px rgba(30, 20, 60, .08); padding: 8px 16px 40px;
+  }
+  .grab { width: 36px; height: 5px; border-radius: 3px; background: #d9d7de; margin: 0 auto 12px; }
+  .tray h2 { font-size: 15px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .tray h2 em { font-style: normal; font-size: 12px; color: var(--muted); font-weight: 500; }
+  .task {
+    display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--line);
+    border-radius: 12px; padding: 11px 12px; margin-bottom: 8px; font-size: 14px; font-weight: 500;
+  }
+  .task .ring { width: 18px; height: 18px; border-radius: 50%; border: 1.6px solid #c9c6d0; flex: none; }
+  .task .meta { margin-left: auto; font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .task.dragging {
+    position: fixed; z-index: 10; margin: 0; transform: scale(1.04) rotate(-1.2deg);
+    box-shadow: 0 18px 40px rgba(40, 20, 90, .22); border-color: transparent;
+  }
+  .ghost { border: 1.5px dashed #c9c2f5; background: var(--accent-soft); border-radius: 12px; margin-bottom: 8px; }
+  .slot { position: absolute; left: 66px; right: 16px; height: 62px; border-radius: 10px; border: 1.5px dashed var(--accent); background: rgba(109, 92, 232, .06); display: none; }
+  .home { position: absolute; bottom: 8px; left: 50%; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #1c1b1f; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="back">‹</div>
+    <h1>Fri Sep 18</h1>
+    <div class="avatar"></div>
+  </div>
+  <div class="week">
+    <div class="day">Mon<b>14</b></div><div class="day">Tue<b>15</b></div><div class="day">Wed<b>16</b></div>
+    <div class="day">Thu<b>17</b></div><div class="day on">Fri<b>18</b></div><div class="day">Sat<b>19</b></div><div class="day">Sun<b>20</b></div>
+  </div>
+  <div class="timeline" id="timeline">
+    <div class="hour"><span>9 AM</span></div>
+    <div class="hour"><span>10 AM</span></div>
+    <div class="hour"><span>11 AM</span></div>
+    <div class="hour"><span>12 PM</span></div>
+    <div class="hour"><span>1 PM</span></div>
+    <div class="hour"><span>2 PM</span></div>
+    <div class="block b-green" style="top:7px;height:30px">Team standup <small style="display:inline;margin-left:6px">9:00</small></div>
+    <div class="block b-purple" data-shot="review" style="top:69px;height:60px">Design review with Priya<small>10:00 – 11:00 · Deep work</small></div>
+    <div class="block b-orange" style="top:224px;height:60px">Lunch with Chloe<small>12:30 – 1:30</small></div>
+    <div class="now" style="top:166px"></div>
+    <div class="slot" id="slot"></div>
+  </div>
+  <div class="tray" id="tray">
+    <div class="grab"></div>
+    <h2>Brain dump <em>3 tasks</em></h2>
+    <div class="task" data-shot="birthday" data-color="pink"><div class="ring"></div>Plan a low-key birthday afternoon<div class="meta"><span class="dot" style="background:#ec5b8a"></span>Family</div></div>
+    <div class="task" data-shot="groceries"><div class="ring"></div>Order groceries<div class="meta"><span class="dot" style="background:#f3a93a"></span>Errands</div></div>
+    <div class="task" data-shot="dentist"><div class="ring"></div>Call the dentist<div class="meta"><span class="dot" style="background:#2fb36a"></span>Health</div></div>
+  </div>
+  <div class="home"></div>
+</div>
+<script>
+  const timeline = document.getElementById('timeline');
+  const slot = document.getElementById('slot');
+  const HOUR = 62, TOP_PAD = 6, FIRST_HOUR = 9;
+  let drag = null;
+
+  function hourAt(clientY) {
+    const r = timeline.getBoundingClientRect();
+    const y = clientY - r.top - TOP_PAD;
+    if (y < 0 || y > HOUR * 6) return null;
+    return Math.max(0, Math.min(5, Math.floor(y / HOUR)));
+  }
+
+  document.querySelectorAll('.task').forEach(task => {
+    task.addEventListener('pointerdown', e => {
+      const r = task.getBoundingClientRect();
+      const ghost = document.createElement('div');
+      ghost.className = 'ghost';
+      ghost.style.height = r.height + 'px';
+      task.after(ghost);
+      task.classList.add('dragging');
+      Object.assign(task.style, { width: r.width + 'px', left: r.left + 'px', top: r.top + 'px' });
+      drag = { task, ghost, dx: e.clientX - r.left, dy: e.clientY - r.top };
+    });
+  });
+  window.addEventListener('pointermove', e => {
+    if (!drag) return;
+    drag.task.style.left = (e.clientX - drag.dx) + 'px';
+    drag.task.style.top = (e.clientY - drag.dy) + 'px';
+    const h = hourAt(e.clientY);
+    const trayTop = document.getElementById('tray').getBoundingClientRect().top;
+    if (h === null || e.clientY > trayTop) { slot.style.display = 'none'; return; }
+    slot.style.display = 'block';
+    slot.style.top = (TOP_PAD + h * HOUR + 1) + 'px';
+  });
+  window.addEventListener('pointerup', e => {
+    if (!drag) return;
+    const { task, ghost } = drag;
+    drag = null;
+    slot.style.display = 'none';
+    const trayTop = document.getElementById('tray').getBoundingClientRect().top;
+    const h = hourAt(e.clientY);
+    if (h === null || e.clientY > trayTop) {
+      task.classList.remove('dragging'); task.removeAttribute('style'); ghost.remove(); return;
+    }
+    const block = document.createElement('div');
+    block.className = 'block b-' + (task.dataset.color || 'purple');
+    block.dataset.shot = 'dropped';
+    block.style.top = (TOP_PAD + h * HOUR + 1) + 'px';
+    block.style.height = '60px';
+    const label = (FIRST_HOUR + h) % 12 || 12;
+    block.innerHTML = task.childNodes[1].textContent + `<small>${label}:00 – ${label + 1}:00 · Family</small>`;
+    timeline.appendChild(block);
+    task.remove(); ghost.remove();
+    document.querySelector('.tray h2 em').textContent = '2 tasks';
+  });
+</script>
+</body>
+</html>

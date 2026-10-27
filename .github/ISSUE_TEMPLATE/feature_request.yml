@@ -1,0 +1,30 @@
+name: Feature request
+description: A screenshot or video you cannot make with agentshot today
+labels: [enhancement]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to make?
+      description: The screenshot or video and where it will be used (help center, App Store, social post, demo). A sketch or a reference image helps.
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: What gets in the way today?
+      description: What you tried with existing recipe fields, scenario steps or commands, and why it falls short.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The recipe or scenario you wish you could write
+      description: Show the JSON. It helps us keep new options small and consistent with the format.
+      render: json
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Contribution
+      options:
+        - label: I (or my agent, following AGENTS.md) would like to implement this

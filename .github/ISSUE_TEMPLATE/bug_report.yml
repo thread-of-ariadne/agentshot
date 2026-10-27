@@ -1,0 +1,48 @@
+name: Bug report
+description: Something renders wrong, a command fails, or a capture misbehaves
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Captures are screenshots of real apps: remove anything private before attaching files.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran, what you expected, what you got. Attach the output image or a frame of the video if the problem is visual.
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and its JSON output
+      description: The exact `node bin/agentshot.mjs ...` command and the full line it printed (plus stderr if any).
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: recipe
+    attributes:
+      label: Recipe or scenario
+      description: The JSON file involved, if any.
+      render: json
+  - type: textarea
+    id: doctor
+    attributes:
+      label: "`node bin/agentshot.mjs doctor` output"
+      render: json
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [Windows 11, Windows 10, macOS, Other]
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: agentshot commit
+      description: Output of `git rev-parse --short HEAD`.

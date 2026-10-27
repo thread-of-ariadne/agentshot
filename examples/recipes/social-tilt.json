@@ -1,0 +1,22 @@
+{
+ "name": "social-tilt",
+ "product": "daybook",
+ "capture": "daybook-phone",
+ "shot": "main",
+ "size": "4:5",
+ "background": "midnight",
+ "tilt": 14,
+ "annotations": [
+  {
+   "type": "text",
+   "text": "Your day, in one drag",
+   "at": [
+    0.5,
+    0.06
+   ],
+   "size": 0.075,
+   "color": "#ffffff"
+  }
+ ],
+ "padding": 0.16
+}

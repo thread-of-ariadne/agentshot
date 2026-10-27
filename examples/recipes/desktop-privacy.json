@@ -1,0 +1,39 @@
+{
+ "name": "desktop-privacy",
+ "product": "daybook",
+ "capture": "daybook-filter",
+ "shot": "start",
+ "device": "browser",
+ "background": "sky",
+ "url": "app.daybook.so/today",
+ "annotations": [
+  {
+   "type": "blur",
+   "target": "row2"
+  },
+  {
+   "type": "redact",
+   "target": "row3"
+  },
+  {
+   "type": "outline",
+   "target": "filter",
+   "pad": 5,
+   "radius": 11
+  },
+  {
+   "type": "arrow",
+   "to": "filter",
+   "anchor": [
+    0.5,
+    1
+   ],
+   "fromCanvas": [
+    0.7,
+    0.42
+   ],
+   "curve": 0.3,
+   "color": "#6d5ce8"
+  }
+ ]
+}

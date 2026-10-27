@@ -1,0 +1,22 @@
+{
+ "name": "filter-video",
+ "product": "daybook",
+ "capture": "daybook-filter",
+ "device": "browser",
+ "background": "sage",
+ "url": "app.daybook.so/today",
+ "zoom": "auto",
+ "annotations": [
+  {
+   "type": "text",
+   "text": "Filter by label color",
+   "at": [
+    0.5,
+    0.025
+   ],
+   "size": 0.04,
+   "start": 0.3,
+   "end": 3.0
+  }
+ ]
+}

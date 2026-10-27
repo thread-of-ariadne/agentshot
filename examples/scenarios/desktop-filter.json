@@ -1,0 +1,49 @@
+{
+ "name": "daybook-filter",
+ "url": "demo-app/desktop.html",
+ "device": "desktop",
+ "track": {
+  "row2": "#list .row:nth-child(2)",
+  "row3": "#list .row:nth-child(3)",
+  "list": "#list"
+ },
+ "steps": [
+  {
+   "shot": "start"
+  },
+  {
+   "wait": 0.6
+  },
+  {
+   "click": "filter",
+   "duration": 1.1
+  },
+  {
+   "wait": 0.9
+  },
+  {
+   "click": "opt-family",
+   "duration": 0.7
+  },
+  {
+   "shot": "family"
+  },
+  {
+   "wait": 1.2
+  },
+  {
+   "click": "opt-errands",
+   "duration": 0.6
+  },
+  {
+   "wait": 1.2
+  },
+  {
+   "click": "clear",
+   "duration": 0.8
+  },
+  {
+   "wait": 1.4
+  }
+ ]
+}

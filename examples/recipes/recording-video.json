@@ -1,0 +1,33 @@
+{
+ "name": "recording-video",
+ "product": "daybook",
+ "capture": "selftest-record",
+ "device": "window",
+ "title": "Daybook",
+ "background": "lavender",
+ "cuts": [
+  {
+   "from": 0.8,
+   "to": 2.6,
+   "name": "Open filter"
+  },
+  {
+   "from": 2.6,
+   "to": 5.4,
+   "speed": 1.5,
+   "name": "Pick labels"
+  }
+ ],
+ "zoom": [
+  {
+   "start": 1.6,
+   "end": 4.6,
+   "scale": 1.6,
+   "target": [
+    700,
+    250
+   ]
+  }
+ ],
+ "pointer": "none"
+}
