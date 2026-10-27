@@ -213,7 +213,8 @@ use `"pointer": "touch"` and `"device": "iphone-black"` as for browser captures.
   "shot": "main",                       // set for a PNG still; omit for an MP4 video
   "size": "16:9",                       // 16:9 16:10 4:3 3:2 1:1 4:5 9:16, or width/height
   "background": "lavender",             // lavender peach sage sky rose mint neutral midnight ink white,
-                                        // any CSS colour/gradient, or an image under public/ (backgrounds/x.jpg)
+                                        // any CSS colour/gradient, an image under public/ (backgrounds/x.jpg), or a
+                                        // photo/painting from `agentshot backgrounds search`: "unsplash:<id>", "met:<id>"...
   "backgroundBlur": 0.02,               // for photo backgrounds, share of the short side
   "device": "iphone-black",             // iphone-black iphone-natural iphone-white browser window none
   "url": "app.ellie.so/today",          // browser bar text;  "title": window title for "window"
@@ -251,6 +252,29 @@ use `"pointer": "touch"` and `"device": "iphone-black"` as for browser captures.
 - Lift on a phone floats the element wider than the device with even margins and dims the rest.
 - Tips: phone stills 16:10 or 4:5, padding 0.07–0.1; for help-center sets keep one background and accent
   across all images; titles via `text` annotations; social: `4:5`, big title, `tilt` 10–15.
+
+## Photo and painting backgrounds
+
+When the user describes a place ("the phone on a black sand dune", "an old Japanese print of morning
+glories"), find it instead of using a preset:
+
+1. `agentshot backgrounds search "black sand dune at night" --orientation landscape` prints `results`
+   (`n`, `background`, `title`, `size`, `credit`) and `sheet`, a numbered contact sheet: Read it and pick.
+   `--source unsplash` (photos), `met`, `artic`, `cleveland` (public-domain paintings and prints from The Met,
+   the Art Institute of Chicago and the Cleveland Museum of Art), `art` (all three museums) or `all`;
+   `--count` up to 30. Search in English, describe what is in the picture.
+2. Put the chosen `background` into the recipe (`"background": "unsplash:Xy12abc"`), usually with a
+   little `backgroundBlur` (0.003–0.01) so the device stays the subject, and render. The first render
+   downloads the file into `public/backgrounds/<source>/`; later renders and `restore` work offline.
+3. The render result and the library version carry the `credit`. Tell the user the credit line when you
+   report the output: crediting is not required by the Unsplash licence or for public-domain art, but it is
+   good manners (Moonjar shows it as "Photo by … on Unsplash").
+
+Unsplash needs the user's free access key in `AGENTSHOT_UNSPLASH_KEY` (`agentshot doctor` shows
+`unsplashKey`). Without it, search uses the museums and the JSON has a `hint`: tell the user to create an
+app at https://unsplash.com/oauth/applications and set the Access Key (Windows: `setx
+AGENTSHOT_UNSPLASH_KEY <key>`, then restart the agent). Never ask for or type the key yourself. A demo key
+allows 50 searches an hour: search once, pick from the sheet, do not search in a loop.
 
 ## Library
 

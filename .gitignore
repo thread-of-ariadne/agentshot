@@ -4,6 +4,11 @@ out/
 .recording/
 .recording-sim/
 public/captures/
+# photos and paintings downloaded for "unsplash:<id>"-style backgrounds
+public/backgrounds/unsplash/
+public/backgrounds/met/
+public/backgrounds/artic/
+public/backgrounds/cleveland/
 # personal work and rendered libraries stay local; only the demo product's style is shared
 work/
 library/*

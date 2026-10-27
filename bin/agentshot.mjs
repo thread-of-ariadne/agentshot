@@ -40,6 +40,11 @@ Render & library
   restore <product> <asset> <version>    re-render an old version as a new one
   style <product> [--init]               show (or create) a product's style.json and guidelines.md
   gallery [--open]                       build library/index.html
+  backgrounds search "<place>" [--source unsplash|met|artic|cleveland|art|all]
+         [--orientation landscape|portrait|squarish] [--count 12]
+                                         photo/painting backgrounds with a numbered contact sheet;
+                                         use one as "background": "unsplash:<id>" (Unsplash needs
+                                         AGENTSHOT_UNSPLASH_KEY; museums are public domain, no key)
 
 Other
   doctor [--request]                     check tools and (macOS) permissions; --request asks for them
@@ -242,11 +247,17 @@ try {
       done({ gallery: file });
       break;
     }
+    case 'backgrounds': {
+      if (pos[0] !== 'search') fail('usage: agentshot backgrounds search "<what the place looks like>" [--source unsplash|met|artic|cleveland|art|all] [--orientation landscape|portrait|squarish] [--count 12]');
+      const { search } = await import('../lib/backgrounds.mjs');
+      done(await search(pos.slice(1).join(' '), opt));
+      break;
+    }
     case 'doctor': {
       const { spawnSync } = await import('node:child_process');
       const { os } = await import('../lib/platform/index.mjs');
       const has = (c) => spawnSync(c, ['-version'], { encoding: 'utf8' }).status === 0;
-      done({ root: ROOT, library: LIBRARY, ffmpeg: has('ffmpeg'), ffprobe: has('ffprobe'), node: process.version, ...os.doctor({ request: !!opt.request }) });
+      done({ root: ROOT, library: LIBRARY, ffmpeg: has('ffmpeg'), ffprobe: has('ffprobe'), unsplashKey: !!process.env.AGENTSHOT_UNSPLASH_KEY, node: process.version, ...os.doctor({ request: !!opt.request }) });
       break;
     }
     case undefined:

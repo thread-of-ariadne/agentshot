@@ -53,6 +53,8 @@ export type Recipe = {
   width: number;
   height: number;
   fps?: number;
+  // preset, CSS background, image under public/, or "unsplash:<id>" / "met:<id>" / "artic:<id>" /
+  // "cleveland:<id>" (the renderer swaps these for the downloaded file before the scene sees them)
   background?: string;
   backgroundBlur?: number;
   grain?: number;

@@ -7,6 +7,15 @@ major version.
 
 ## [Unreleased]
 
+### Added
+- Photo and painting backgrounds: `agentshot backgrounds search "<place>"` finds candidates on
+  Unsplash (needs a free access key in `AGENTSHOT_UNSPLASH_KEY`) and among public-domain works of
+  The Met, the Art Institute of Chicago and the Cleveland Museum of Art (no key), with a numbered
+  contact sheet. A recipe uses one as `"background": "unsplash:<id>"` (or `met:`, `artic:`,
+  `cleveland:`); the first render downloads it into `public/backgrounds/<source>/`, later renders
+  are offline. The credit is stored in the library version, returned by `render` and shown in the
+  gallery. `doctor` reports `unsplashKey`.
+
 ## [0.1.0] - 2026-10-27
 
 First public release.

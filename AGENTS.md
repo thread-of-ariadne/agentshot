@@ -35,6 +35,7 @@ gitignored) and copy the product's `style.json` there if the recipe relies on it
 | Recording, OS specifics | `lib/record.mjs`, `lib/platform/{win,mac}.mjs`, `recorder/win.ps1`, `recorder/mac.swift` |
 | Import of files | `lib/import.mjs` |
 | Contact sheets, activity | `lib/frames.mjs` |
+| Photo/painting backgrounds (search, download, credit) | `lib/backgrounds.mjs` |
 | Rendering pipeline | `lib/render.mjs`, `lib/bundle.mjs`, `lib/serve.mjs`, `lib/video-frames.mjs` |
 | Live preview | `lib/preview.mjs`, `src/preview.tsx` |
 | Scene (what a frame looks like) | `src/Scene.tsx`, `src/components/*.tsx` |
@@ -104,7 +105,9 @@ open an issue with the feature-request template (https://github.com/thread-of-ar
 - **Screenshots in capture/render go through Playwright's `page.screenshot`** when the page has
   device-scale emulation; a raw CDP capture from a second session drops it.
 - **Errors tell the agent what to do**: name the bad value and list the valid ones.
-- **Local only**: no telemetry, no network calls at render time, servers bind to 127.0.0.1.
+- **Local only**: no telemetry, servers bind to 127.0.0.1. The scene never touches the network;
+  the only network calls are `backgrounds search` and the one-time download of a
+  `"unsplash:<id>"`-style background before the first frame (`lib/backgrounds.mjs`).
 
 ## Boundaries
 

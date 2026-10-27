@@ -10,7 +10,8 @@ scenario (what to click)  →  capture (browser / desktop window / iOS Simulator
 recipe   (how it looks)   →  render (headless Chrome + ffmpeg)  →  library/<product>/<asset>/v001.png|mp4
 ```
 
-Everything runs locally. Captures and renders never leave your machine.
+Everything runs locally. Captures and renders never leave your machine. The only network
+access is `backgrounds search` and the one-time download of a photo or painting background.
 
 ## Requirements
 
@@ -77,12 +78,15 @@ recipe formats, tips) is [skill/agentshot/SKILL.md](skill/agentshot/SKILL.md).
 | `history` / `restore` | Version history; restoring re-renders an old version as a new one |
 | `style <product> --init` | Creates a product's default look (`style.json`) and rules (`guidelines.md`) |
 | `gallery --open` | Builds and opens `library/index.html` |
+| `backgrounds search "black sand dune"` | Finds photo (Unsplash) and painting (museum) backgrounds and prints a numbered contact sheet; a recipe uses one as `"background": "unsplash:<id>"` |
 
 ## Features
 
 - **Devices:** iPhone (black, natural, white) with a clean 9:41 status bar, browser window,
   app window, no frame, 3D tilt.
-- **Backgrounds:** soft gradient presets with grain, any CSS background, your own photos with blur.
+- **Backgrounds:** soft gradient presets with grain, any CSS background, your own photos with blur,
+  any Unsplash photo (with your free access key) and public-domain paintings from The Met, the Art
+  Institute of Chicago and the Cleveland Museum of Art, found by describing the place.
 - **Callouts:** lift (an element floats above the screen), glass loupe, numbered steps, arrows,
   outlines, blur and redaction for private data, titles in a dozen bundled fonts.
 - **Smooth capture:** web apps are captured frame by frame (the page clock is paused and

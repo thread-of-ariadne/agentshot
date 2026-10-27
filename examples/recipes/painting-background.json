@@ -1,0 +1,9 @@
+{
+ "name": "painting-background",
+ "product": "daybook",
+ "capture": "daybook-phone",
+ "shot": "main",
+ "background": "artic:60300",
+ "backgroundBlur": 0.003,
+ "padding": 0.1
+}
